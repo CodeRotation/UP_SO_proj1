@@ -1,16 +1,16 @@
 version: '3'
 services:
-  portainer:
-    container_name: portainer
-    image: portainer/portainer
-    command: -H unix:///var/run/docker.sock
-    restart: always
-    ports:
-      - 9000:9000
-      - 8000:8000
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_data:/data
+  # portainer:
+  #   container_name: portainer
+  #   image: portainer/portainer
+  #   command: -H unix:///var/run/docker.sock
+  #   restart: always
+  #   ports:
+  #     - 9000:9000
+  #     - 8000:8000
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - portainer_data:/data
 
   web-dvwa:
     container_name: web-dvwa
@@ -33,6 +33,12 @@ services:
       - PROXYLOCATION=http://web-dvwa:80/
     links:
       - logstash:logstash
+      - elasticsearch:elasticsearch
+      - kibana:kibana
+    depends_on: 
+      - logstash
+      - elasticsearch
+      - kibana
     build: ./modsecurity/
     privileged: true
     networks:
@@ -85,7 +91,5 @@ networks:
   elknetwork:
     driver: bridge
 
-volumes:
-  portainer_data: {}
-
-
+# volumes:
+#   portainer_data: {}
