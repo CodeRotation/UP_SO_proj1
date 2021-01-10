@@ -10,6 +10,7 @@ filebeat:
   inputs:
     -
       paths:
+        - /var/log/modsec_audit.log 
         - /var/log/apache2/error.log
         - /var/log/apache2/access.log
       document_type: syslog
