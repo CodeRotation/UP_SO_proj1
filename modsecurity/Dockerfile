@@ -6,5 +6,6 @@ COPY filebeat.yml /etc/filebeat/filebeat.yml
 COPY filebeat.template.json /etc/filebeat/filebeat.template.json
 COPY modsec_entry.sh /
 COPY modsecurity.conf /etc/modsecurity.d/
+COPY kibana.yml /usr/share/kibana/config/kibana.yml
 RUN chmod +x /modsec_entry.sh
 CMD ["/modsec_entry.sh"]
