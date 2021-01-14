@@ -4,8 +4,8 @@ services:
   web-dvwa:
     container_name: web-dvwa
     image: vulnerables/web-dvwa
-    ports:
-      - 8080:80
+#    ports:
+#      - 8080:80
     networks:
       - elknetwork
 
@@ -69,6 +69,8 @@ services:
     hostname: kibana
     ports:
       - 5601:5601 # Kibana GUI
+    volumes:
+      - ./modsecurity/kibana.yml:/usr/share/kibana/config/kibana.yml
     links:
       - elasticsearch:elasticsearch
     depends_on:
